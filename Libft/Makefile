@@ -6,16 +6,16 @@
 #    By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 18:21:02 by clbernar          #+#    #+#              #
-#    Updated: 2023/05/05 13:26:57 by clbernar         ###   ########.fr        #
+#    Updated: 2023/05/12 19:52:04 by clbernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-CC = cc
+CC = @cc
 FLAGS = -Wall -Werror -Wextra -I.
-AR = ar rc
-RM = rm -f
+AR = @ar rc
+RM = @rm -f
 
 HD_DIR = ./Includes
 HD = $(HD_DIR)/libft.h $(HD_DIR)/Get_next_line.h $(HD_DIR)/ft_printf.h
@@ -45,17 +45,17 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	$(AR) $(NAME) $(OBJS)
-	ranlib $(NAME)
+	@ranlib $(NAME)
 
 bonus : $(B_OBJS)
 	$(AR) $(NAME) $(B_OBJS)
-	ranlib $(NAME)
+	@ranlib $(NAME)
 
 cc :
 	$(CC) $(FLAGS) main.c -L. -lft
 
 %.o : %.c $(HD)
-	$(CC) $(FLAGS) -I $(HD_DIR) -c $< -o $@
+	 $(CC) $(FLAGS) -I $(HD_DIR) -c $< -o $@
 
 clean:
 	$(RM) $(OBJS) $(B_OBJS)

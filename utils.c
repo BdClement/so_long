@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:22:22 by clbernar          #+#    #+#             */
-/*   Updated: 2023/05/12 16:22:36 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:12:56 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	init_struct(t_solong *solong, char *map_path)
 {
 	solong->map = NULL;
 	solong->map_nb_line = 0;
+	solong->moves = 1;
+	solong->collected = 0;
+	solong->nb_item = 0;
+	solong->put_exit_back = 0;
+	solong->all_collected = 0;
 	solong->map_path = map_path;
 	get_mapline_number(solong);
 	get_map(solong);
@@ -34,9 +39,16 @@ void	init_map_struct(t_map *map_info)
 	map_info->not_allowed = 0;
 	map_info->map_len = 0;
 	map_info->map_nb_line = 0;
+	map_info->map_to_big = 0;
 	map_info->map_copy = NULL;
 	map_info->exit_accessible = 0;
 	map_info->item_accessible = 0;
+}
+
+void	collected(t_solong *solong, int y, int x)
+{
+	solong->collected++;
+	solong->map[y][x] = '0';
 }
 
 // Cette fonction duplique une chaine de carcteres
@@ -81,25 +93,4 @@ void	map_dup(t_solong *solong, t_map *map_info)
 		map_info->map_copy[i] = ft_strdup(solong->map[i]);
 		i++;
 	}
-}
-
-// Cette fonction affiche les messages d'erreurs necessaires
-// Et quitte le programme proprement
-void	display_error_message(t_map map_info)
-{
-	ft_printf("Error\n");
-	// Message en cs de doublons ??
-	if (map_info.not_allowed == 1)
-		ft_printf("La map contient des carcateres non autorisés\n");
-	if (map_info.exit != 1 || map_info.start != 1)
-		ft_printf("La map doit contenir UNE sortie, UNE position de départ\n");
-	if (map_info.item == 0)
-		ft_printf("La map doit contenir au moins un objet a collecter\n");
-	if (map_info.is_rectangle == 1)
-		ft_printf("La map n'est pas de forme rectangulaire\n");
-	if (map_info.is_rectangle == 0 && map_info.wall_around == 1)
-		ft_printf("La map n'est pas fermée en etant encadrée par des mur\n");
-	if (map_info.valid_items == 1)
-		ft_printf("Il n'existe pas de chemin valide pour cette map\n");
-	exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 #    By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/04 20:44:46 by clbernar          #+#    #+#              #
-#    Updated: 2023/05/12 19:58:16 by clbernar         ###   ########.fr        #
+#    Updated: 2023/05/16 18:49:36 by clbernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = @cc
 CFLAGS = -Wall -Werror -Wextra
 RM = @rm -f
 
-SRCS = main.c parsing.c read_map.c utils.c
+SRCS = main.c parsing.c read_map.c utils.c moves.c display.c clean.c
 
 LIB = $(LIBFT_PATH)/libft.a
 LIBFT_PATH = ./Libft

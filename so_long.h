@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 20:55:46 by clbernar          #+#    #+#             */
-/*   Updated: 2023/05/17 15:04:34 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:50:30 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	go_left(t_solong *solong);
 void	go_down(t_solong *solong);
 void	go_up(t_solong *solong);
 // DISPLAY
-void	display_error_message(t_map map_info);
+void	display_error_message(t_solong *solong, t_map *map_info);
 void	get_images(t_solong *solong);
 void	display_map(t_solong *solong);
 void	put_image(t_solong *solong, int i, int j);

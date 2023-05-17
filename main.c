@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 20:47:27 by clbernar          #+#    #+#             */
-/*   Updated: 2023/05/17 12:15:38 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:41:00 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char **argv)
 		mlx_hook(solong.win, DestroyNotify, StructureNotifyMask,
 			ft_exit, &solong);
 		mlx_loop(solong.mlx_ptr);
+		// ft_ptrintf("0 == map rectangulaire == %d\n", map_info.)
 	}
 	else
 		ft_printf("Le nombre d'arguments fourni est incorrect\n");

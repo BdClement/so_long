@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:48:18 by clbernar          #+#    #+#             */
-/*   Updated: 2023/05/17 14:55:05 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/05/17 19:45:56 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	get_images(t_solong *solong)
 			"./img/ground.xpm", &width, &height);
 	solong->wall = mlx_xpm_file_to_image(solong->mlx_ptr,
 			"./img/wall.xpm", &width, &height);
+// 	if (solong->perso == NULL || solong->item == NULL || solong->door == NULL || solong->ground  == NULL || solong->wall == NULL)
+// 		clean(solong);
+//	A voir pour si on change le path de image pour sortir proprement
 }
 
 void	put_image(t_solong *solong, int i, int j)
@@ -74,22 +77,27 @@ void	display_map(t_solong *solong)
 
 // Cette fonction affiche les messages d'erreurs necessaires
 // Et quitte le programme proprement
-void	display_error_message(t_map map_info)
+void	display_error_message(t_solong *solong,t_map *map_info)
 {
 	ft_printf("Error\n");
-	if (map_info.not_allowed == 1)
+	if (map_info->not_allowed != 0)
 		ft_printf("La map contient des carcateres non autorisés\n");
-	if (map_info.exit != 1 || map_info.start != 1)
+	if (map_info->exit != 1 || map_info->start != 1)
 		ft_printf("La map doit contenir UNE sortie, UNE position de départ\n");
-	if (map_info.item == 0)
+	if (map_info->item == 0)
 		ft_printf("La map doit contenir au moins un objet a collecter\n");
-	if (map_info.is_rectangle == 1)
+	if (map_info->is_rectangle == 1)
 		ft_printf("La map n'est pas de forme rectangulaire\n");
-	if (map_info.map_to_big == 1)
+	if (map_info->map_to_big == 1)
 		ft_printf("La map est trop grande \n");
-	if (map_info.is_rectangle == 0 && map_info.wall_around == 1)
-		ft_printf("La map n'est pas fermée en etant encadrée par des mur\n");
-	if (map_info.valid_items == 1)
+	if (map_info->is_rectangle == 0 && map_info->wall_around == 1)
+		ft_printf("La map n'est pas fermée en etant encadrée par des murs\n");
+	if (map_info->valid_items == 1 && map_info->is_rectangle == 0
+		&& map_info->wall_around == 0)
 		ft_printf("Il n'existe pas de chemin valide pour cette map\n");
+	free_map(solong->map);
+	if (map_info->is_rectangle == 0 && map_info->wall_around == 0
+		&& map_info->start == 1)
+		free_map(map_info->map_copy);
 	exit(EXIT_FAILURE);
 }

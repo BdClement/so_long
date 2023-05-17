@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 14:35:01 by clbernar          #+#    #+#             */
-/*   Updated: 2023/05/17 13:47:42 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/05/17 19:45:23 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ void	check_map_rectangle(t_solong *solong, t_map *map_info)
 			map_info->is_rectangle = 1;
 		i++;
 	}
-	if (map_info->map_len == map_info->map_nb_line)
-		map_info->is_rectangle = 1;
 }
 
 // Cette fonction est la fonction qui determine si il existe
@@ -84,6 +82,8 @@ void	check_map_rectangle(t_solong *solong, t_map *map_info)
 // Si il reste des items ou l'exit alors il n'existe pas de chemin valide
 void	check_valid_items(t_solong *solong, t_map *map_info)
 {
+	if (map_info->start != 1)
+		return ;
 	map_dup(solong, map_info);
 	fill_map_copy(map_info, map_info->start_pos.x, map_info->start_pos.y);
 	if (map_info->item_accessible == map_info->item
@@ -102,22 +102,20 @@ void	check_map(t_solong *solong, t_map *map_info)
 	map_info->map_nb_line = solong->map_nb_line;
 	get_map_info(solong->map, map_info);
 	if (map_info->start != 1 || map_info->exit != 1 || map_info->item == 0
-		|| map_info->not_allowed == 1)
+		|| map_info->not_allowed != 0)
 		error = 1;
+	// ft_printf("not_allowed %d\n", map_info->not_allowed);
 	check_map_rectangle(solong, map_info);
 	if (map_info->is_rectangle == 0)
 		check_map_wall(solong->map, map_info);
 	if (map_info->is_rectangle == 1 || map_info->wall_around == 1)
 		error = 1;
-	check_valid_items(solong, map_info);
+	else
+		check_valid_items(solong, map_info);
 	if (map_info->valid_items == 1 || map_info->map_to_big == 1)
 		error = 1;
 	solong->nb_item = map_info->item;
 	solong->cur = map_info->start_pos;
 	if (error == 1)
-	{
-		free_map(solong->map);
-		free_map(map_info->map_copy);
-		display_error_message(*map_info);
-	}
+		display_error_message(solong, map_info);
 }

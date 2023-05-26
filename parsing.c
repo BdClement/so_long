@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 14:35:01 by clbernar          #+#    #+#             */
-/*   Updated: 2023/05/17 19:45:23 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/05/19 11:58:35 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	check_map(t_solong *solong, t_map *map_info)
 	if (map_info->start != 1 || map_info->exit != 1 || map_info->item == 0
 		|| map_info->not_allowed != 0)
 		error = 1;
-	// ft_printf("not_allowed %d\n", map_info->not_allowed);
 	check_map_rectangle(solong, map_info);
 	if (map_info->is_rectangle == 0)
 		check_map_wall(solong->map, map_info);

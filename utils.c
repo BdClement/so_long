@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:22:22 by clbernar          #+#    #+#             */
-/*   Updated: 2023/05/17 17:37:10 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/05/19 13:25:40 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	init_map_struct(t_map *map_info)
 	map_info->item_accessible = 0;
 }
 
+// Cette fonction gere uniquement le ramassage d'un item
 void	collected(t_solong *solong, int y, int x)
 {
 	solong->collected++;
@@ -86,7 +87,11 @@ void	map_dup(t_solong *solong, t_map *map_info)
 	i = 0;
 	map_info->map_copy = malloc(sizeof(char *) * (solong->map_nb_line + 1));
 	if (map_info->map_copy == NULL)
+	{
 		perror("Error");
+		free_map(solong->map);
+		exit(EXIT_FAILURE);
+	}
 	map_info->map_copy[solong->map_nb_line] = NULL;
 	while (i < solong->map_nb_line)
 	{

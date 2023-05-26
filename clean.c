@@ -6,12 +6,13 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:49:11 by clbernar          #+#    #+#             */
-/*   Updated: 2023/05/17 19:32:48 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/05/19 13:29:41 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Cette fonction free un **char
 void	free_map(char **map)
 {
 	int	i;
@@ -22,22 +23,30 @@ void	free_map(char **map)
 	free(map);
 }
 
+// Cette fonction est un intermediaire a passer a mlx_hook
+// pour quitter proprement en cas de ESC ou X
 int	ft_exit(t_solong *solong)
 {
 	clean(solong);
 	return (0);
 }
 
+// Cette fonction permet de quitter proprement le programme
 void	clean(t_solong *solong)
 {
 	free_map(solong->map);
 	free_map(solong->map_copy);
-	mlx_destroy_image(solong->mlx_ptr, solong->perso);
-	mlx_destroy_image(solong->mlx_ptr, solong->wall);
-	mlx_destroy_image(solong->mlx_ptr, solong->item);
-	mlx_destroy_image(solong->mlx_ptr, solong->door);
+	if (solong->perso != NULL)
+		mlx_destroy_image(solong->mlx_ptr, solong->perso);
+	if (solong->wall != NULL)
+		mlx_destroy_image(solong->mlx_ptr, solong->wall);
+	if (solong->item != NULL)
+		mlx_destroy_image(solong->mlx_ptr, solong->item);
+	if (solong->door != NULL)
+		mlx_destroy_image(solong->mlx_ptr, solong->door);
+	if (solong->ground != NULL)
+		mlx_destroy_image(solong->mlx_ptr, solong->ground);
 	mlx_loop_end(solong->mlx_ptr);
-	mlx_destroy_image(solong->mlx_ptr, solong->ground);
 	mlx_destroy_window(solong->mlx_ptr, solong->win);
 	mlx_destroy_display(solong->mlx_ptr);
 	free(solong->mlx_ptr);

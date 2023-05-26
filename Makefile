@@ -6,7 +6,7 @@
 #    By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/04 20:44:46 by clbernar          #+#    #+#              #
-#    Updated: 2023/05/17 16:33:32 by clbernar         ###   ########.fr        #
+#    Updated: 2023/05/19 12:35:34 by clbernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,11 @@ CC = @cc
 CFLAGS = -Wall -Werror -Wextra
 RM = @rm -f
 
-SRCS = $(wildcard *.c)
-
-## SRCS = main.c parsing.c read_map.c utils.c moves.c display.c clean.c
+SRCS = main.c parsing.c read_map.c utils.c moves.c display.c clean.c
 
 OBJ_DIR = ./obj
 
-OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
+#OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 LIB = $(LIBFT_PATH)/libft.a
 LIBFT_PATH = ./Libft

@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 20:55:46 by clbernar          #+#    #+#             */
-/*   Updated: 2023/05/17 18:50:30 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/05/19 13:20:07 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 // # include <sys/types.h>
 // # include <sys/stat.h>
 // # include <fcntl.h>
-# include <stdio.h>
+// # include <stdio.h>
 
 typedef struct s_point
 {
